@@ -5,7 +5,8 @@ export const ContainerImage = styled.div`
   display: flex;
   justify-content: center;
   img {
-    width: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
   }
 `;
