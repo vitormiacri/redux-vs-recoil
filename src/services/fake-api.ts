@@ -1,10 +1,16 @@
 import { v4 as uuid } from 'uuid';
 
+export interface Message {
+  id: string;
+  name: string;
+  message: string;
+}
+
 let messages = [
   {
     id: uuid(),
     name: 'Vitor',
-    message: 'Testando mensagem 1',
+    message: 'Testando mensagem 1 bem grande para testar toda a linha de mensagens',
   },
   {
     id: uuid(),
@@ -23,7 +29,7 @@ let messages = [
   },
 ];
 
-export const getMessages = () => {
+export const getMessages = (): Promise<Message[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(messages);
@@ -31,7 +37,7 @@ export const getMessages = () => {
   });
 };
 
-export const addMessage = (message: string) => {
+export const addMessage = (message: string): Promise<Message[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       messages.push({
