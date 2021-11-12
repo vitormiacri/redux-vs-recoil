@@ -1,21 +1,20 @@
 import React from 'react';
-import { Message } from '../../services/fake-api';
+import { useSelector } from 'react-redux';
 
-import { Container } from './styles';
+import { MessageState } from '../../store/types';
 
-interface Props {
-  list: Message[];
-}
+import { Container, MessagesContainer } from './styles';
 
-const MessageList: React.FC<Props> = ({ list }) => {
+const MessageList: React.FC = () => {
+  const messagesList = useSelector((state: MessageState) => state.messages);
   return (
-    <>
-      {list.map((item) => (
+    <MessagesContainer>
+      {messagesList?.map((item) => (
         <Container key={item.id}>
           <p>{item.message}</p>
         </Container>
       ))}
-    </>
+    </MessagesContainer>
   );
 };
 

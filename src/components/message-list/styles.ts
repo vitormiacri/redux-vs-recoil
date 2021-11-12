@@ -10,3 +10,13 @@ export const Container = styled.div`
     background-color: beige;
   }
 `;
+
+export const MessagesContainer = styled.div`
+  width: 100%;
+  flex: 1 1 auto;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;

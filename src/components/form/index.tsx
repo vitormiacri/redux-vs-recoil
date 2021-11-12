@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addNewMessage } from '../../store/actions';
 import Input from '../input';
 import { Container } from './styles';
 
-type Props = {
-  handleAddMessage(text: string): Promise<void>;
-};
-const Form: React.FC<Props> = ({ handleAddMessage }) => {
+const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -16,7 +16,7 @@ const Form: React.FC<Props> = ({ handleAddMessage }) => {
   const handleClickButton = async () => {
     setIsLoading(true);
     setInputValue('');
-    await handleAddMessage(inputValue);
+    await dispatch(addNewMessage(inputValue));
     setIsLoading(false);
   };
 

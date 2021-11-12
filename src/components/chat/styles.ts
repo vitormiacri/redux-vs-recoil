@@ -27,13 +27,3 @@ export const Header = styled.div`
   justify-content: center;
   flex: 0 0 4rem;
 `;
-
-export const MessagesContainer = styled.div`
-  width: 100%;
-  flex: 1 1 auto;
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-`;

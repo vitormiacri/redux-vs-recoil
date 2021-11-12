@@ -1,58 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { addMessage, getMessages, Message } from '../../services/fake-api';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMessages } from '../../store/actions';
+import { MessageState } from '../../store/types';
 import Avatar from '../avatar';
 import Form from '../form';
 import MessageList from '../message-list';
 
-import { Container, Card, Header, MessagesContainer } from './styles';
-
-type StateProps = {
-  loading: boolean;
-  messageList: Message[];
-};
+import { Container, Card, Header } from './styles';
 
 const Chat: React.FC = () => {
-  const [state, setState] = useState<StateProps>({
-    loading: true,
-    messageList: [],
-  });
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: MessageState) => state.isLoading);
 
   useEffect(() => {
-    const loadMessages = async () => {
-      const response = await getMessages();
-      setState({
-        loading: false,
-        messageList: [...response],
-      });
-    };
-    loadMessages();
-  }, []);
-
-  const handleAddMessage = async (text: string) => {
-    if (text.trim().length > 0) {
-      const res = await addMessage(text);
-      setState((old) => ({
-        ...old,
-        messageList: [...res],
-      }));
-    }
-  };
+    dispatch(fetchMessages());
+  }, [dispatch]);
 
   return (
     <Container>
       <Card>
         <Header>
-          <Avatar imageUrl="https://pps.whatsapp.net/v/t61.24694-24/185709635_117614070407462_8428985686804165378_n.jpg?ccb=11-4&oh=9498b6dab376ea7049c767ea1aa15747&oe=6190FD76" />
-          <h1>Discípulos</h1>
+          <Avatar imageUrl="https://pps.whatsapp.net/v/t61.24694-24/222332886_4458061357558087_7010113878345465524_n.jpg?ccb=11-4&oh=acea880b82bb4319a51d47d7c230bfd0&oe=6192BA6E" />
+          <h1>Eu, eu mesmo e Irene</h1>
         </Header>
-        {state.loading ? (
-          <div>Carregando...</div>
-        ) : (
-          <MessagesContainer>
-            <MessageList list={state.messageList} />
-          </MessagesContainer>
-        )}
-        <Form handleAddMessage={handleAddMessage} />
+        {isLoading ? <div>Carregando...</div> : <MessageList />}
+        <Form />
       </Card>
     </Container>
   );
