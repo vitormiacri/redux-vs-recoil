@@ -1,21 +1,19 @@
 import React from 'react';
-import { Message } from '../../services/fake-api';
+import { useRecoilValue } from 'recoil';
+import { messagesAtom } from '../../recoil';
 
-import { Container } from './styles';
+import { Container, MessagesContainer } from './styles';
 
-interface Props {
-  list: Message[];
-}
-
-const MessageList: React.FC<Props> = ({ list }) => {
+const MessageList: React.FC = () => {
+  const messages = useRecoilValue(messagesAtom);
   return (
-    <>
-      {list.map((item) => (
-        <Container key={item.id}>
+    <Container>
+      {messages.map((item) => (
+        <MessagesContainer key={item.id}>
           <p>{item.message}</p>
-        </Container>
+        </MessagesContainer>
       ))}
-    </>
+    </Container>
   );
 };
 

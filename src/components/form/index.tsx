@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { messagesAtom } from '../../recoil';
+import { addMessage } from '../../services/fake-api';
 import Input from '../input';
 import { Container } from './styles';
 
-type Props = {
-  handleAddMessage(text: string): Promise<void>;
-};
-const Form: React.FC<Props> = ({ handleAddMessage }) => {
+const Form: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [, setMessages] = useRecoilState(messagesAtom);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -16,7 +17,8 @@ const Form: React.FC<Props> = ({ handleAddMessage }) => {
   const handleClickButton = async () => {
     setIsLoading(true);
     setInputValue('');
-    await handleAddMessage(inputValue);
+    const response = await addMessage(inputValue);
+    setMessages(response);
     setIsLoading(false);
   };
 

@@ -16,24 +16,3 @@ export const Card = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-export const Header = styled.div`
-  width: 100%;
-  height: 4rem;
-  background-color: #ededed;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 4rem;
-`;
-
-export const MessagesContainer = styled.div`
-  width: 100%;
-  flex: 1 1 auto;
-  background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-`;

@@ -40,11 +40,14 @@ export const getMessages = (): Promise<Message[]> => {
 export const addMessage = (message: string): Promise<Message[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      messages.push({
-        id: uuid(),
-        name: 'Vitor',
-        message,
-      });
+      messages = [
+        ...messages,
+        {
+          id: uuid(),
+          name: 'Vitor',
+          message,
+        },
+      ];
       resolve(messages);
     }, 1500);
   });
